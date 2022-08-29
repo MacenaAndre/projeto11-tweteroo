@@ -9,27 +9,27 @@ const users = [];
 const tweets = [];
 
 server.post("/sign-up", (req, res) => {
-    let newUser = req.body; 
+    const newUser = req.body; 
     users.push(newUser);
     res.send("OK");
 });
 
 server.post("/tweets", (req, res) => {
-    let newTweet = req.body;
+    const newTweet = req.body;
     tweets.push(newTweet);
     res.send("OK");
 });
 
 server.get("/tweets", (req, res) => {
-    let visibleTweets = tweets.filter((value, index) => index >= tweets.length -10);
+    const visibleTweets = tweets.filter((value, index) => index >= tweets.length -10);
     for(let i = 0; i < visibleTweets.length; i++) {
          visibleTweets[i] = {
             ...visibleTweets[i],
             avatar: users.find((value) => value.username === visibleTweets[i].username).avatar
-         }
+         };
     }
 
     res.send(visibleTweets);
-})
+});
 
-server.listen(5000, () => console.log("Listening on port 5000..."))
+server.listen(5000, () => console.log("Listening on port 5000..."));
