@@ -22,6 +22,13 @@ server.post("/tweets", (req, res) => {
 
 server.get("/tweets", (req, res) => {
     let visibleTweets = tweets.filter((value, index) => index >= tweets.length -10);
+    for(let i = 0; i < visibleTweets.length; i++) {
+         visibleTweets[i] = {
+            ...visibleTweets[i],
+            avatar: users.find((value) => value.username === visibleTweets[i].username).avatar
+         }
+    }
+
     res.send(visibleTweets);
 })
 
